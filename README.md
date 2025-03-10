@@ -33,40 +33,40 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-#import libraries to find mae, mse
+
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import mean_squared_error
 
-#read csv file
+
 df= pd.read_csv('/content/student_scores.csv')
 
-#displaying the content in datafile
+
 df.head()
 df.tail()
 
-# Segregating data to variables
+
 X=df.iloc[:,:-1].values
 X
 y=df.iloc[:,-1].values
 y
 
-#splitting train and test data
+
 from sklearn.model_selection import train_test_split
 X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=1/2,random_state=0)
 
-#import linear regression model and fit the model with the data
+
 from sklearn.linear_model import LinearRegression
 regressor=LinearRegression()
 regressor.fit(X_train,y_train)
 
-#displaying predicted values
+
 y_pred=regressor.predict(X_test)
 y_pred
 
-#displaying actual values
+
 y_test
 
-#graph plot for training data
+
 import matplotlib.pyplot as plt
 plt.scatter(X_train,y_train,color='red')
 plt.plot(X_train,regressor.predict(X_train),color='blue')
@@ -74,14 +74,14 @@ plt.title("Hours vs Scores (Training Set)")
 plt.xlabel("Hours")
 plt.ylabel("Scores")
 
-#graph plot for test data
+
 plt.scatter(X_test,y_test,color='red')
 plt.plot(X_test,regressor.predict(X_test),color='blue')
 plt.title("Hours vs Scores (Testing Set)")
 plt.xlabel("Hours")
 plt.ylabel("Scores")
 
-#find mae,mse,rmse
+
 mse=mean_squared_error(y_test,y_pred)
 print('MSE = ',mse)
 mae=mean_absolute_error(y_test,y_pred)
